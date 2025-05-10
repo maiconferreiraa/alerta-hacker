@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
     <style>
         body {
@@ -10,25 +11,35 @@
             font-family: "Courier New", monospace;
             text-align: center;
             padding-top: 50px;
+            height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
+
         .danger {
             color: red;
             font-size: 2em;
             animation: piscar 1s infinite;
         }
+
         @keyframes piscar {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+
         .terminal {
             margin: 30px auto;
-            width: 80%;
+            width: 90%;
             max-width: 700px;
             text-align: left;
             border: 2px solid lime;
             padding: 20px;
             background-color: #111;
         }
+
         .typing {
             display: inline-block;
             overflow: hidden;
@@ -37,13 +48,16 @@
             border-right: 2px solid lime;
             font-size: 1em;
         }
+
         @keyframes typing {
             from { width: 0 }
             to { width: 100% }
         }
+
         @keyframes blink {
             50% { border-color: transparent }
         }
+
         .fake-button {
             margin-top: 30px;
             padding: 15px 30px;
@@ -77,11 +91,20 @@
         PARAR VAZAMENTO
     </button>
 
-    <!-- Som de alarme -->
-    <audio autoplay loop>
+    <audio id="alarm" autoplay loop>
         <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
         Seu navegador não suporta áudio embutido.
     </audio>
+
+    <script>
+        // Forçar reprodução após interação do usuário (em alguns dispositivos móveis)
+        document.body.addEventListener('click', function() {
+            const alarm = document.getElementById('alarm');
+            if (alarm) {
+                alarm.play().catch(() => {}); // Evita erro se bloqueado
+            }
+        });
+    </script>
 
 </body>
 </html>
